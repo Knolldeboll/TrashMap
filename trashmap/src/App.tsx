@@ -1,21 +1,13 @@
 import "leaflet/dist/leaflet.css";
-import './App.css'
-import SimpleMap from './SimpleMap';
-
-
+import "./App.css";
+import SimpleMap from "./components/SimpleMap";
+import LibreMapComponent from "./components/LibreMapComponent";
 
 function App() {
   //const [count, setCount] = useState(0)
 
   //var map = L.map('map').setView([51.505, -0.09], 13);
-  return (
-    <>
-      <div>
-          <h1>poop</h1>
-          <SimpleMap></SimpleMap>
-      </div>
-    </>
-  )
+  return <SimpleMap />;
 }
 
-export default App
+export default App;
