@@ -74,7 +74,7 @@ const LibreMapComponent = () => {
 
   // Das hier wird übrigens vor useEffect [] ausgeführt
   return (
-    <div ref={mapContainer} style={{ width: "100vw", height: "100vh" }} />
+    <div ref={mapContainer} style={{ position: "absolute", width: "80%", height: "80%" }} />
   );
 
 };
