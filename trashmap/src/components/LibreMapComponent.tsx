@@ -7,13 +7,15 @@ const LibreMapComponent = () => {
   // TODO: any als generic type ist hier iwie doof, aber geht schon. Ref-Typ muss eig "string | HTMLElement" sein, aber man kann nur
   // noch mit extra "| null" machen.
   // -> Es kann prinzipiell auch null drin sein, wenn
-  const mapContainer = useRef<any>(null);
+
+  // Hier kommt das Div aus dem Render rein! Siehe unten
+  const mapContainer = useRef<HTMLDivElement | null>(null);
 
   // TS typing: Hier mit <> machen. Generics!
   // Der Typ wird wohl auch iwie für die .current - Property verwendet!
   // Ohne Generic type: map: React.RefObject<null>
   // Mit Generic type: map: React.RefObject<maplibregl.Map|null>
-  const map = useRef<maplibregl.Map>(null);
+  //const map = useRef<maplibregl.Map>(null);
 
   // TODO: Sachen wie Zoom können als Param gegeben werden, von dessen Wert useEffect dann abhängig ist!
 
@@ -22,8 +24,28 @@ const LibreMapComponent = () => {
   // Bei leer: Führe das beim Load aus.
   useEffect(() => {
 
+
     console.log("Useeffect effect")
 
+
+    if (!mapContainer.current) {
+      console.log("No Mapcontainer div exists!");
+      return;
+    }
+
+
+    // map einfach nur hier hinklatschen? ok wtf
+    // Aber andererseits: bei rerender wird neu geladen! 
+
+    const map = new maplibregl.Map({
+      container: mapContainer.current, // container Object
+      style: "https://demotiles.maplibre.org/style.json", // style URL
+      center: [0, 0], // starting position [lng, lat]
+      zoom: 1, // starting zoom
+    });
+
+
+    /*
     if (map.current) {
       console.log("LibreMapComponent: map.current already present! Look here:");
       console.log(map.current)
@@ -35,32 +57,25 @@ const LibreMapComponent = () => {
       console.log("Return");
       return;
     }
+      */
 
+    return () => map.remove();
     console.log("LibreMapComponent: Initializing map.current");
-    map.current = new maplibregl.Map({
-      container: "map", // container Object
-      style: "https://demotiles.maplibre.org/style.json", // style URL
-      center: [0, 0], // starting position [lng, lat]
-      zoom: 1, // starting zoom
-    });
+
   }, []);
 
 
   // Ahh Digga: hier kommt nix rein, weil useEffect erst nach dem Rendern ausgeführt wird!
-  console.log("LibreMapComponent: current map: ", map.current);
+  //  console.log("LibreMapComponent: current map: ", map.current);
 
 
 
-  console.log("Return from LibreMapComp");
+  // console.log("Return from LibreMapComp");
+
+  // Das hier wird übrigens vor useEffect [] ausgeführt
   return (
-
-    <div className="map-wrap">
-      <div ref={mapContainer} id="map" className="map" />
-    </div>
-
+    <div ref={mapContainer} style={{ width: "100vw", height: "100vh" }} />
   );
-
-
 
 };
 export default LibreMapComponent;

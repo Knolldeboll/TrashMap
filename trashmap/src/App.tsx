@@ -11,7 +11,12 @@ function App() {
   return (
 
     <>
-      <LibreMapComponent />
+
+      <div id="center">
+        <LibreMapComponent />
+      </div>
+
+
     </>
 
   )
