@@ -17,14 +17,22 @@ const LibreMapComponent = () => {
 
   // TODO: Sachen wie Zoom können als Param gegeben werden, von dessen Wert useEffect dann abhängig ist!
 
-  // useEffect: rufe auf, wenn sich die Dependencies nach der Funktion (dem "Effect") ändern.
+
+  // useEffect: wenn sich der im Array gegebene Wert (die Abhängigkeit) ändert, führe den Effect (Die Methode) aus!
+  // Bei leer: Führe das beim Load aus.
   useEffect(() => {
+
+    console.log("Useeffect effect")
+
     if (map.current) {
-      console.log("LibreMapComponent: map.current already present!");
+      console.log("LibreMapComponent: map.current already present! Look here:");
+      console.log(map.current)
+      console.log("Return");
       return;
     }
     if (mapContainer.current == null) {
       console.log("LibreMapComponent: No Map container present!");
+      console.log("Return");
       return;
     }
 
@@ -35,13 +43,24 @@ const LibreMapComponent = () => {
       center: [0, 0], // starting position [lng, lat]
       zoom: 1, // starting zoom
     });
-  });
+  }, []);
 
+
+  // Ahh Digga: hier kommt nix rein, weil useEffect erst nach dem Rendern ausgeführt wird!
   console.log("LibreMapComponent: current map: ", map.current);
+
+
+
+  console.log("Return from LibreMapComp");
   return (
+
     <div className="map-wrap">
       <div ref={mapContainer} id="map" className="map" />
     </div>
+
   );
+
+
+
 };
 export default LibreMapComponent;
