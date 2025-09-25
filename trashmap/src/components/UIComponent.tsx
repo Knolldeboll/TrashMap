@@ -2,6 +2,7 @@
 // Soll einen komplett überliegenden Container mit dem unteren Feld für Eingaben, dem Slider und dem Einstellungsbutton erzeugen.
 // Dieses Component stellt einfach nur die divs für die UI-Elemente bereit und positioniert diese.
 
+
 import ControlField from "./ControlField";
 
 const UIComponent = () => {
@@ -22,7 +23,7 @@ const UIComponent = () => {
 
 
         <div id="settingsbuttoncontainer" className="bg-gray-100 rounded-full h-16 w-16 fixed right-0 top-3/6 text-center pointer-events-auto">Stngs</div>
-        <div id="controlfieldcontainer" className="bg-gray-100 fixed bottom-0 inset-x-0 mx-auto h-1/5 w-[99%] border-[1px] border-black rounded-t-md text-center pointer-events-auto">
+        <div id="controlfieldcontainer" className="bg-gray-100 fixed bottom-0 inset-x-0 mx-auto h-1/5 w-[99%] border-[1px] border-b-0 border-black rounded-t-md text-center pointer-events-auto">
             <ControlField></ControlField>
         </div>;
 
