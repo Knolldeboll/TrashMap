@@ -6,10 +6,13 @@ import App from './App.tsx'
 createRoot(document.getElementById('root')!).render
 
 
-  // (< App />)
+  (< App />)
 
-  (
-    <StrictMode>
-      <App />
-    </StrictMode>,
-  )
+
+/*
+(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+  */

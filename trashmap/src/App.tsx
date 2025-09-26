@@ -5,6 +5,7 @@ import LibreMapComponent from "./components/LibreMapComponent";
 import tailwindcss from "@tailwindcss/vite";
 import TailwindTestComponent from "./components/tailwindtestcomponent";
 import UIComponent from "./components/UIComponent";
+import ReactTestComponent from "./components/ReactTestComponent";
 function App() {
   //const [count, setCount] = useState(0)
 
@@ -17,15 +18,19 @@ function App() {
   // Current UI Component (Settings/Controls)
   // Maps 
 
+  /*
+    return (
+      <>
+        <div id="center" className="h-screen w-screen">
+          <LibreMapComponent />
+          <UIComponent></UIComponent>
+        </div>
+      </>
+    );
+    */
 
-  return (
-    <>
-      <div id="center" className="h-screen w-screen">
-        <LibreMapComponent />
-        <UIComponent></UIComponent>
-      </div>
-    </>
-  );
+
+  return <ReactTestComponent></ReactTestComponent>
 
 
   // return <TailwindTestComponent></TailwindTestComponent>;
