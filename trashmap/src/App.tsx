@@ -6,6 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 import TailwindTestComponent from "./components/tailwindtestcomponent";
 import UIComponent from "./components/UIComponent";
 import ReactTestComponent from "./components/ReactTestComponent";
+import JsTestComponent from "./components/JsTestComponent";
 function App() {
   //const [count, setCount] = useState(0)
 
@@ -27,10 +28,10 @@ function App() {
         </div>
       </>
     );
-    */
+  
+  */
 
-
-  return <ReactTestComponent></ReactTestComponent>
+  return <JsTestComponent></JsTestComponent>;//<ReactTestComponent></ReactTestComponent>
 
 
   // return <TailwindTestComponent></TailwindTestComponent>;
