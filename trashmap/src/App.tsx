@@ -19,19 +19,19 @@ function App() {
   // Current UI Component (Settings/Controls)
   // Maps 
 
-  /*
-    return (
-      <>
-        <div id="center" className="h-screen w-screen">
-          <LibreMapComponent />
-          <UIComponent></UIComponent>
-        </div>
-      </>
-    );
-  
-  */
 
-  return <JsTestComponent></JsTestComponent>;//<ReactTestComponent></ReactTestComponent>
+  return (
+    <>
+      <div id="center" className="h-screen w-screen">
+        <LibreMapComponent />
+        <UIComponent></UIComponent>
+      </div>
+    </>
+  );
+
+
+
+  //return <JsTestComponent></JsTestComponent>;//<ReactTestComponent></ReactTestComponent>
 
 
   // return <TailwindTestComponent></TailwindTestComponent>;

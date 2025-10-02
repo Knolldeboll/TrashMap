@@ -9,11 +9,17 @@ import type { MarkerData } from "../types";
 export const fetchAllMarkers = async (): Promise<MarkerData[]> => {
 
     // TODO: Richtige URL rein. 
-    const response = await fetch("abc.de/markers");
 
+    // Der hier wirft automatisch nen Error, wenn z.B. die Adresse nicht aufgelöst werden kann! 
+    // Das untere response.ok ist also ggf. unnötig
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
 
+    console.log("response", response)
+
+    //.ok ist, wenn übertragung gepasst hat, technisch gesehen!
     if (!response.ok) {
         //throw error in async: Returne das Promise, aber rejected!
+        console.log("networkutils response not ok!")
         throw new Error('Error beim Laden der Ressourcen: ${response.status}');
 
     }

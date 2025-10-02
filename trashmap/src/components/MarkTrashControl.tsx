@@ -4,6 +4,7 @@ const MarkTrashControl = () => {
     const sendTrashLocation = () => {
 
         // TODO: Triggere Methode von tatsächlichem Businesslogik-Component welcher für Netzwerk zuständig ist.
+
         console.log("Trash Location sent!")
     }
 
