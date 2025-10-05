@@ -1,6 +1,8 @@
-import maplibregl from "maplibre-gl";
+import maplibregl, { Marker } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef } from "react";
+
+// Wird das hier überhaupt angewandt? Die darin genannten Klassen kommen iwie gar nicht vor...
 import "./map.css";
 
 const LibreMapComponent = () => {
@@ -22,10 +24,14 @@ const LibreMapComponent = () => {
 
   // useEffect: wenn sich der im Array gegebene Wert (die Abhängigkeit) ändert, führe den Effect (Die Methode) aus!
   // Bei leer: Führe das beim Load aus.
+
+
+  // TODO: Map in nem State speichern?
+
   useEffect(() => {
 
 
-    console.log("Useeffect effect")
+    console.log("LibreMapComponent useEffect []")
 
 
     if (!mapContainer.current) {
@@ -34,7 +40,7 @@ const LibreMapComponent = () => {
     }
 
 
-    // map einfach nur hier hinklatschen? ok wtf
+    // map einfach nur hier hinklatschen? ok wtf, vielleicht in nen State packen! 
     // Aber andererseits: bei rerender wird neu geladen! 
 
     const map = new maplibregl.Map({
@@ -44,6 +50,10 @@ const LibreMapComponent = () => {
       zoom: 1, // starting zoom
     });
 
+
+    if (map) {
+      const testMarker = new Marker().setLngLat([0, 0]).addTo(map);
+    }
 
     /*
     if (map.current) {
@@ -59,8 +69,9 @@ const LibreMapComponent = () => {
     }
       */
 
+
     return () => map.remove();
-    console.log("LibreMapComponent: Initializing map.current");
+    //console.log("LibreMapComponent: Initializing map.current");
 
   }, []);
 
