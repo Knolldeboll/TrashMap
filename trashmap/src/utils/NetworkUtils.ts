@@ -20,10 +20,13 @@ export const fetchAllMarkers = async (): Promise<MarkerData[]> => {
     if (!response.ok) {
         //throw error in async: Returne das Promise, aber rejected!
         console.log("networkutils response not ok!")
-        throw new Error('Error beim Laden der Ressourcen: ${response.status}');
+        throw new Error(`Error beim Laden der Ressourcen: ${response.status}`);
 
     }
 
+
+    // hier werden die aus dem Json gewonnenen Objekte direkt in ne Liste vom Typ MarkerData[] gemappt! 
+    // Das kann man ez machen, solange es nur DTOs ohne Methoden sind!
     const data: MarkerData[] = await response.json();
 
     // Return bedeutet in async: Pack den return-Wert in ein Promise bzw. Resolve das Promise mit dem Wert als Value

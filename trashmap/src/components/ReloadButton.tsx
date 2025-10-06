@@ -1,37 +1,42 @@
 import { useState } from "react";
 import { fetchAllMarkers } from "../utils/NetworkUtils";
 import type { MarkerData } from "../types";
-
+import { useMarkerStore } from "../stores/MarkerStore";
 
 export const ReloadButton = () => {
+  const [response, setResponse] = useState(null);
 
+  const allMarkers = useMarkerStore((state) => state.allMarkers);
+  const setAllMarkers = useMarkerStore((state) => state.setAllMarkers);
 
-    const [response, setResponse] = useState(null);
+  const loadResourcesCallback = async () => {
+    console.log("Reload Button Clicked! Calling API");
 
-    const loadResourcesCallback = async () => {
-        console.log("Reload Button Clicked! Calling API")
+    try {
+      // Hier kommt MarkerData[] zurück!
+      const data = await fetchAllMarkers();
 
-        try {
+      // Bei Promise resolve/alles hat geklappt kommt hier ein Array zurück!
 
-            // Hier kommt MarkerData[] zurück!
-            const data = await fetchAllMarkers();
+      console.log("RefreshButton: Data Received after reload button: ", data);
 
-            // Array handeln also!
-            const responseString = data.map((value: MarkerData) => console.log(value));
-
-            // console.log("Data Received after reload button: ", responseString);
-
-        } catch (err) {
-            console.log("caught Error after reload button:", err);
-        }
+      // Dieses in den Store schreiben, dann aktualisiert sich die Karte!
+      setAllMarkers(data);
+    } catch (err) {
+      console.log("caught Error after reload button:", err);
     }
+  };
 
-
-    return (<>
-        <div id="reloadbutton" className="bg-gray-100 rounded-full h-16 w-16 text-center pointer-events-auto" onClick={loadResourcesCallback}>reload</div>
-        <div id="displayresponse">Response: {response} </div>
-    </>)
-
-
-
-}
+  return (
+    <>
+      <div
+        id="reloadbutton"
+        className="bg-gray-100 rounded-full h-16 w-16 text-center pointer-events-auto"
+        onClick={loadResourcesCallback}
+      >
+        reload
+      </div>
+      <div id="displayresponse">Response: {response} </div>
+    </>
+  );
+};

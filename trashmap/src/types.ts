@@ -19,6 +19,8 @@ export interface FetchItem {
 export interface MarkerData {
     longitude: number,
     latitude: number,
+    datetime: string,
+    username: string,
 
 
 }

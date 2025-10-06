@@ -4,10 +4,14 @@ import type { Marker } from "maplibre-gl";
 
 interface MarkerStore {
     allMarkers: MarkerData[],
-    currentDisplayMarkers: Marker[]
+    currentDisplayMarkers: MarkerData[],
+    setAllMarkers: (newMarkers:MarkerData[])=>void,
+    addSingleMarker: (newMarker:MarkerData)=>void,
+   
+
 }
 
-const useMarkerStore = create<MarkerStore>((set) => ({
+export const useMarkerStore = create<MarkerStore>((set) => ({
     // Felder für Daten
     allMarkers: [],
 

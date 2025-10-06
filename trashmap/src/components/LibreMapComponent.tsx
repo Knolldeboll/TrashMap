@@ -1,9 +1,10 @@
-import maplibregl, { Marker } from "maplibre-gl";
+import maplibregl, { Map, Marker } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef } from "react";
 
 // Wird das hier überhaupt angewandt? Die darin genannten Klassen kommen iwie gar nicht vor...
 import "./map.css";
+import { useMarkerStore } from "../stores/MarkerStore";
 
 const LibreMapComponent = () => {
   // TODO: any als generic type ist hier iwie doof, aber geht schon. Ref-Typ muss eig "string | HTMLElement" sein, aber man kann nur
@@ -13,6 +14,11 @@ const LibreMapComponent = () => {
   // Hier kommt das Div aus dem Render rein! Siehe unten
   const mapContainer = useRef<HTMLDivElement | null>(null);
 
+  const mapRef = useRef<maplibregl.Map>(null);
+
+  const setAllMarkers = useMarkerStore((state) => state.setAllMarkers);
+  const allMarkers = useMarkerStore((state) => state.allMarkers);
+
   // TS typing: Hier mit <> machen. Generics!
   // Der Typ wird wohl auch iwie für die .current - Property verwendet!
   // Ohne Generic type: map: React.RefObject<null>
@@ -21,27 +27,21 @@ const LibreMapComponent = () => {
 
   // TODO: Sachen wie Zoom können als Param gegeben werden, von dessen Wert useEffect dann abhängig ist!
 
-
   // useEffect: wenn sich der im Array gegebene Wert (die Abhängigkeit) ändert, führe den Effect (Die Methode) aus!
   // Bei leer: Führe das beim Load aus.
-
 
   // TODO: Map in nem State speichern?
 
   useEffect(() => {
-
-
-    console.log("LibreMapComponent useEffect []")
-
+    console.log("LibreMapComponent useEffect []");
 
     if (!mapContainer.current) {
       console.log("No Mapcontainer div exists!");
       return;
     }
 
-
-    // map einfach nur hier hinklatschen? ok wtf, vielleicht in nen State packen! 
-    // Aber andererseits: bei rerender wird neu geladen! 
+    // map einfach nur hier hinklatschen? ok wtf, vielleicht in nen State packen!
+    // Aber andererseits: bei rerender wird neu geladen!
 
     const map = new maplibregl.Map({
       container: mapContainer.current, // container Object
@@ -50,6 +50,8 @@ const LibreMapComponent = () => {
       zoom: 1, // starting zoom
     });
 
+    // Persist Map!
+    mapRef.current = map;
 
     if (map) {
       const testMarker = new Marker().setLngLat([0, 0]).addTo(map);
@@ -69,24 +71,35 @@ const LibreMapComponent = () => {
     }
       */
 
-
     return () => map.remove();
     //console.log("LibreMapComponent: Initializing map.current");
-
   }, []);
 
+  // Reagiere auf neu in den Store geschriebene MarkerData und mal diese auf die Map!
+  useEffect(() => {
+    console.log("Libremapcomponent: allMarkers Changed!");
+
+    if (mapRef != null) {
+      console.log("add new shit to the map!");
+      const newMarker = new Marker()
+        .setLngLat([Math.random() * 10, 0])
+        .addTo(mapRef.current as Map);
+    }
+
+    mapRef.current;
+  }, [allMarkers]);
 
   // Ahh Digga: hier kommt nix rein, weil useEffect erst nach dem Rendern ausgeführt wird!
   //  console.log("LibreMapComponent: current map: ", map.current);
-
-
 
   // console.log("Return from LibreMapComp");
 
   // Das hier wird übrigens vor useEffect [] ausgeführt
   return (
-    <div ref={mapContainer} style={{ position: "absolute", width: "100%", height: "100%" }} />
+    <div
+      ref={mapContainer}
+      style={{ position: "absolute", width: "100%", height: "100%" }}
+    />
   );
-
 };
 export default LibreMapComponent;
