@@ -91,9 +91,9 @@ const LibreMapComponent = () => {
     // TODO: Alle Markers scheißen.
     for (let marker of allMarkers) {
       console.log("marker:", marker);
-      //const newMarker = new Marker()
-      //  .setLngLat([marker.longitude, marker.latitude])
-      //  .addTo(mapRef.current as Map);
+      const newMarker = new Marker()
+        .setLngLat([marker.longitude, marker.latitude])
+        .addTo(mapRef.current as Map);
     }
   }, [allMarkers]);
 
