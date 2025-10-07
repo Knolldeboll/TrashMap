@@ -5,6 +5,8 @@ import { useEffect, useRef } from "react";
 // Wird das hier überhaupt angewandt? Die darin genannten Klassen kommen iwie gar nicht vor...
 import "./map.css";
 import { useMarkerStore } from "../stores/MarkerStore";
+import type { MarkerData } from "../types";
+import { fetchAllMarkers } from "../utils/NetworkUtils";
 
 const LibreMapComponent = () => {
   // TODO: any als generic type ist hier iwie doof, aber geht schon. Ref-Typ muss eig "string | HTMLElement" sein, aber man kann nur
@@ -53,40 +55,46 @@ const LibreMapComponent = () => {
     // Persist Map!
     mapRef.current = map;
 
+    // Funktion zum asynchronen fetch von Map-Daten!
+    // Muss hier intern definiert werden, da useEffect() keine async-Function mit "Promise" Rückgabewert nehmen kann!
+
+    const getData = async () => {
+      try {
+        const data = await fetchAllMarkers();
+        setAllMarkers(data);
+      } catch (err) {
+        console.error("Error while initially fetching marker Data:", err);
+      }
+    };
+
+    // Wenn Map vorhanden, versuche alle Marker von der API zu holen
     if (map) {
-      const testMarker = new Marker().setLngLat([0, 0]).addTo(map);
+      console.log("Map present after mount, try to load data!");
+      getData();
     }
-
-    /*
-    if (map.current) {
-      console.log("LibreMapComponent: map.current already present! Look here:");
-      console.log(map.current)
-      console.log("Return");
-      return;
-    }
-    if (mapContainer.current == null) {
-      console.log("LibreMapComponent: No Map container present!");
-      console.log("Return");
-      return;
-    }
-      */
-
+    // Return hier: Methode, die beim unmount aufgerufen werden soll oder so..
     return () => map.remove();
-    //console.log("LibreMapComponent: Initializing map.current");
   }, []);
 
   // Reagiere auf neu in den Store geschriebene MarkerData und mal diese auf die Map!
   useEffect(() => {
     console.log("Libremapcomponent: allMarkers Changed!");
 
-    if (mapRef != null) {
-      console.log("add new shit to the map!");
-      const newMarker = new Marker()
-        .setLngLat([Math.random() * 10, 0])
-        .addTo(mapRef.current as Map);
+    if (mapRef == null) {
+      console.log("Libremap useEffect on allMarkers: no map present!");
+
+      return;
     }
 
-    mapRef.current;
+    console.log("add new markers to the map!");
+
+    // TODO: Alle Markers scheißen.
+    for (let marker of allMarkers) {
+      console.log("marker:", marker);
+      //const newMarker = new Marker()
+      //  .setLngLat([marker.longitude, marker.latitude])
+      //  .addTo(mapRef.current as Map);
+    }
   }, [allMarkers]);
 
   // Ahh Digga: hier kommt nix rein, weil useEffect erst nach dem Rendern ausgeführt wird!

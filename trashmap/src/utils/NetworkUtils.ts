@@ -3,6 +3,8 @@
 
 import type { MarkerData } from "../types";
 
+const VITE_MARKER_URL = import.meta.env.VITE_BACKEND_MARKER_API;
+
 // TODO: durch Custom-Hooks ersetzen, wenn weitere Funktionalität wie z.b. das aufrechterhalten von States notwendig wird!
 // z.B. wenn man auch das Handling von Errors etc. auslagern will und diese Sachen nen stabilen State benötigen
 
@@ -10,9 +12,11 @@ export const fetchAllMarkers = async (): Promise<MarkerData[]> => {
 
     // TODO: Richtige URL rein. 
 
+    console.log("Fetch all Markers")
+    
     // Der hier wirft automatisch nen Error, wenn z.B. die Adresse nicht aufgelöst werden kann! 
     // Das untere response.ok ist also ggf. unnötig
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const response = await fetch(`${VITE_MARKER_URL}`);
 
     console.log("response", response)
 

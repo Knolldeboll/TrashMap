@@ -14,6 +14,7 @@ export const ReloadButton = () => {
 
     try {
       // Hier kommt MarkerData[] zurück!
+      // -> Und?!?
       const data = await fetchAllMarkers();
 
       // Bei Promise resolve/alles hat geklappt kommt hier ein Array zurück!
