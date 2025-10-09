@@ -18,8 +18,19 @@ const LibreMapComponent = () => {
 
   const mapRef = useRef<maplibregl.Map>(null);
 
+  // Store Access Methods/Fields
   const setAllMarkers = useMarkerStore((state) => state.setAllMarkers);
   const allMarkers = useMarkerStore((state) => state.allMarkers);
+
+  const addCurrentDisplayMarker = useMarkerStore(
+    (state) => state.addCurrentDisplayMarker
+  );
+  const setCurrentDisplayMarkers = useMarkerStore(
+    (state) => state.setCurrentDisplayMarkers
+  );
+  const allCurrentDisplayMarkers = useMarkerStore(
+    (state) => state.currentDisplayMarkers
+  );
 
   // TS typing: Hier mit <> machen. Generics!
   // Der Typ wird wohl auch iwie für die .current - Property verwendet!
@@ -52,7 +63,7 @@ const LibreMapComponent = () => {
       zoom: 1, // starting zoom
     });
 
-    // Persist Map!
+    // Persist Map object over renders
     mapRef.current = map;
 
     // Funktion zum asynchronen fetch von Map-Daten!
@@ -86,14 +97,23 @@ const LibreMapComponent = () => {
       return;
     }
 
-    console.log("add new markers to the map!");
+    // Hier ist tatsächlich die einzige Stelle wo das repainten passiert - muss man nicht auslagern
+    // ReloadButton triggert den Code hier, in dem der Store geändert wird!
+    console.log("First remove currently displayed Markers");
 
-    // TODO: Alle Markers scheißen.
+    for (let mark of allCurrentDisplayMarkers) {
+      mark.remove();
+      setCurrentDisplayMarkers([]);
+    }
+
+    console.log(" then add new markers to the map!");
+
     for (let marker of allMarkers) {
       console.log("marker:", marker);
       const newMarker = new Marker()
         .setLngLat([marker.longitude, marker.latitude])
         .addTo(mapRef.current as Map);
+      addCurrentDisplayMarker(newMarker);
     }
   }, [allMarkers]);
 
