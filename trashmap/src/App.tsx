@@ -1,12 +1,8 @@
 import "leaflet/dist/leaflet.css";
 import "./App.css";
-import SimpleMap from "./components/SimpleMap";
 import LibreMapComponent from "./components/LibreMapComponent";
-import tailwindcss from "@tailwindcss/vite";
-import TailwindTestComponent from "./components/tailwindtestcomponent";
 import UIComponent from "./components/UIComponent";
-import ReactTestComponent from "./components/ReactTestComponent";
-import JsTestComponent from "./components/JsTestComponent";
+
 function App() {
   //const [count, setCount] = useState(0)
 
@@ -15,10 +11,9 @@ function App() {
 
   // Hier kommt Logik rein: welche UI Component (Modus) wird aktuell gerendert?
 
-  // Hier kommt schlussendlich rein: 
+  // Hier kommt schlussendlich rein:
   // Current UI Component (Settings/Controls)
-  // Maps 
-
+  // Maps
 
   return (
     <>
@@ -29,10 +24,7 @@ function App() {
     </>
   );
 
-
-
   //return <JsTestComponent></JsTestComponent>;//<ReactTestComponent></ReactTestComponent>
-
 
   // return <TailwindTestComponent></TailwindTestComponent>;
 }
