@@ -70,6 +70,7 @@ const LibreMapComponent = () => {
     // Muss hier intern definiert werden, da useEffect() keine async-Function mit "Promise" Rückgabewert nehmen kann!
 
     const getData = async () => {
+      console.log("Try to fetch initial data");
       try {
         const data = await fetchAllMarkers();
         setAllMarkers(data);
@@ -77,6 +78,22 @@ const LibreMapComponent = () => {
         console.error("Error while initially fetching marker Data:", err);
       }
     };
+
+    /*
+    // Der Bums hier war für schauen, welcher Port im Container verwendet wird, hat sich aber glaub geklärt..
+    const debug = async () => {
+      console.log("Try to reach backend in container for debugging");
+      try {
+        const res = await fetch("http://localhost:8080/debug");
+        console.log("debug response", res);
+      } catch (err) {
+        console.log("error while debug-connecting", err);
+      }
+    };
+
+    debug();
+
+    */
 
     // Wenn Map vorhanden, versuche alle Marker von der API zu holen
     if (map) {

@@ -1,9 +1,12 @@
 // Sammlung von Methoden für Netzwerk-Kommunikation (über REST)
+// TODO: Mock Versions of the Network methods, with local storage in fields in this file.
 
 import type { MarkerData } from "../types";
 
 const VITE_MARKER_URL = import.meta.env.VITE_BACKEND_API_ALL_MARKERS;
 const VITE_POST_MARKER_URL = import.meta.env.VITE_BACKEND_API_SINGLE_MARKER;
+
+const mockMarkerData: MarkerData[] = [];
 
 // TODO: durch Custom-Hooks ersetzen, wenn weitere Funktionalität wie z.b. das aufrechterhalten von States notwendig wird!
 // z.B. wenn man auch das Handling von Errors etc. auslagern will und diese Sachen nen stabilen State benötigen
@@ -11,7 +14,7 @@ const VITE_POST_MARKER_URL = import.meta.env.VITE_BACKEND_API_SINGLE_MARKER;
 export const fetchAllMarkers = async (): Promise<MarkerData[]> => {
   // TODO: Richtige URL rein.
 
-  console.log("Fetch all Markers");
+  console.log("Fetch all Markers from ", VITE_MARKER_URL);
 
   // Der hier wirft automatisch nen Error, wenn z.B. die Adresse nicht aufgelöst werden kann!
   // Das untere response.ok ist also ggf. unnötig
@@ -32,6 +35,14 @@ export const fetchAllMarkers = async (): Promise<MarkerData[]> => {
 
   // Return bedeutet in async: Pack den return-Wert in ein Promise bzw. Resolve das Promise mit dem Wert als Value
   return data;
+};
+
+export const mockFetchAllMarkers = async (): Promise<MarkerData[]> => {
+  // TODO: Richtige URL rein.
+
+  console.log("Mock-Fetch all Markers ");
+  // Return bedeutet in async: Pack den return-Wert in ein Promise bzw. Resolve das Promise mit dem Wert als Value
+  return mockMarkerData;
 };
 
 export const postSingleMarker = async (marker: MarkerData) => {
@@ -59,4 +70,10 @@ export const postSingleMarker = async (marker: MarkerData) => {
 
   console.log("response ok:", response);
   return response;
+};
+
+export const mockPostSingleMarker = async (marker: MarkerData) => {
+  console.log("Mock-Post single Marker");
+  mockMarkerData.push(marker);
+  return;
 };
