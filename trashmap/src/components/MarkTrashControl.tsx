@@ -1,6 +1,6 @@
 import { useMarkerStore } from "../stores/MarkerStore";
 import type { MarkerData } from "../types";
-import { fetchAllMarkers, postSingleMarker } from "../utils/NetworkUtils";
+import { fetchAllMarkers, postSingleMarker } from "../utils/index";
 
 const MarkTrashControl = () => {
   const setAllMarkers = useMarkerStore((state) => state.setAllMarkers);

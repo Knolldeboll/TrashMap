@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchAllMarkers } from "../utils/NetworkUtils";
+import { fetchAllMarkers } from "../utils/index";
 import type { MarkerData } from "../types";
 import { useMarkerStore } from "../stores/MarkerStore";
 

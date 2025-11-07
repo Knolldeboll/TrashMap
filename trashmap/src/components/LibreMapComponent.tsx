@@ -6,8 +6,9 @@ import { useEffect, useRef } from "react";
 import "./map.css";
 import { useMarkerStore } from "../stores/MarkerStore";
 import type { MarkerData } from "../types";
-import { fetchAllMarkers } from "../utils/NetworkUtils";
+import { fetchAllMarkers } from "../utils/index";
 
+// TODO: Reimport Network stuff!
 const LibreMapComponent = () => {
   // TODO: any als generic type ist hier iwie doof, aber geht schon. Ref-Typ muss eig "string | HTMLElement" sein, aber man kann nur
   // noch mit extra "| null" machen.
