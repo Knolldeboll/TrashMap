@@ -2,7 +2,10 @@ const VITE_MOCK_BACKEND = import.meta.env.VITE_MOCK_BACKEND;
 
 let impl;
 
-if (VITE_MOCK_BACKEND) {
+console.log("VITE_MOCK_BACKEND", VITE_MOCK_BACKEND);
+
+let mock = true;
+if (mock) {
   console.log("Exporting Mock NetworkUtils");
   impl = await import("./NetworkUtils.mock.ts");
 } else {

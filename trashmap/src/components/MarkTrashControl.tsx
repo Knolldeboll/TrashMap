@@ -7,8 +7,8 @@ const MarkTrashControl = () => {
 
   const sendTrashLocation = async () => {
     const mockMarker: MarkerData = {
-      latitude: Math.random() * 10,
       longitude: Math.random() * 10,
+      latitude: Math.random() * 10,
       datetime: "08-10-2025 15:56",
       username: "Grobian",
     };

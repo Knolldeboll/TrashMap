@@ -5,7 +5,6 @@ import { useEffect, useRef } from "react";
 // Wird das hier überhaupt angewandt? Die darin genannten Klassen kommen iwie gar nicht vor...
 import "./map.css";
 import { useMarkerStore } from "../stores/MarkerStore";
-import type { MarkerData } from "../types";
 import { fetchAllMarkers } from "../utils/index";
 
 // TODO: Reimport Network stuff!

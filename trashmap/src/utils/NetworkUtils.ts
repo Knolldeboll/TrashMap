@@ -1,6 +1,7 @@
 // Sammlung von Methoden für Netzwerk-Kommunikation (über REST)
 // TODO: Mock Versions of the Network methods, with local storage in fields in this file.
 
+import type { Marker } from "maplibre-gl";
 import type { MarkerData } from "../types";
 
 const VITE_MARKER_URL = import.meta.env.VITE_BACKEND_API_ALL_MARKERS;
@@ -29,7 +30,10 @@ export const fetchAllMarkers = async (): Promise<MarkerData[]> => {
 
   // hier werden die aus dem Json gewonnenen Objekte direkt in ne Liste vom Typ MarkerData[] gemappt!
   // Das kann man ez machen, solange es nur DTOs ohne Methoden sind!
-  const data: MarkerData[] = await response.json();
+
+  // Aber: tatsächlich kommt hier immer der Typ aus dem Backend an! (id,long,lat,dt,name) und nicht MarkerData!
+  // Funktioniert aber trotzdem! lol!
+  const data = await response.json();
 
   // Return bedeutet in async: Pack den return-Wert in ein Promise bzw. Resolve das Promise mit dem Wert als Value
   return data;
