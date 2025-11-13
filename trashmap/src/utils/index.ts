@@ -4,7 +4,7 @@ let impl;
 
 console.log("VITE_MOCK_BACKEND", VITE_MOCK_BACKEND);
 
-let mock = true;
+let mock = false;
 if (mock) {
   console.log("Exporting Mock NetworkUtils");
   impl = await import("./NetworkUtils.mock.ts");
