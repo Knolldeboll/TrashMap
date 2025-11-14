@@ -9,8 +9,10 @@ import MarkTrashControl from "./MarkTrashControl";
 
 const ControlField = () => {
   // TODO tailwind: 100% breit, 100% hoch (in ) , rest in Kindern
+  // TODO: ControlField ist der eigentliche Rahmen mit BG und anderen Attributen. Dieser soll Attribute wie Höhe etc.
+  // vorgeben, und nicht der Container in UIComponent!
   return (
-    <div className="w-[100%] h-[100%] flex flex-row">
+    <div className="bg-gray-100 h-[20vh] w-[99vw] border-[1px] border-b-0 border-black rounded-t-md text-center flex flex-row">
       <MarkTrashControl></MarkTrashControl>
     </div>
   );

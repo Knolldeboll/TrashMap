@@ -6,17 +6,13 @@ import { ReloadButton } from "./ReloadButton";
 import { SettingsButton } from "./SettingsButton";
 import ModeSelector from "./ModeSelector";
 
+// Component for organizing placement of contained UI elements
 const UIComponent = () => {
-  // Der obere div soll fix immer Fullscreen sein, nicht beklickbar sein (man muss durch den durch noch die Karte bedienen können)
-  // die weiteren sind Kinder von dem, und haben immer fixed Position an den richtigen Stellen und auch ihre höhe/breite.
+  // Die divs hier dienen nur als Container zur Anordnung der UI-Elemente.
+  // Die Kinder geben dann die konkret sichtbaren Styles an
 
-  // Der Slider kommt hier dann auch iwie noch rein..
+  // TODO: Macht hier Grid auf oberstem Level Sinn, damit man die UI-Gruppen besser Platzieren kann? (Statt bottom-0 und so)
 
-  // -> wir machen die Container-Divs für die UI-Elemente (Settings Button und ControlField) hier und auch deren Platzierung.
-  // da diese Klasse sich ja auch um die UI gesamt kümmert! Das Aussehen etc. der enthaltenen Elemente erledigen dann die
-  // extrahierten Components.
-
-  // TODO: Styles bei größen reaktiv Anpassen! z.B. sind die Buttons bei Tablet/iPad zu klein!
   return (
     <div
       id="uicontainer"
@@ -41,7 +37,7 @@ const UIComponent = () => {
         </div>
         <div
           id="controlfieldcontainer"
-          className="bg-gray-100 h-[20vh] w-[99%] border-[1px] border-b-0 border-black rounded-t-md text-center pointer-events-auto"
+          className=" w-fit h-fit  pointer-events-auto"
         >
           <ControlField></ControlField>
         </div>
