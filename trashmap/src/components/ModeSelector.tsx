@@ -16,10 +16,11 @@ const ModeSelector = () => {
   return (
     <div>
       <div
-        className="bg-amber-50 w-full h-full"
+        className="bg-amber-50 w-14 h-10 text-center"
         id="openButton"
         onClick={() => {
           setIsUp(!isUp);
+          console.log("isUp changed");
         }}
       >
         {isUp ? "v" : "^"}

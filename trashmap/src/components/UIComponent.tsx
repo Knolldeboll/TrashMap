@@ -29,11 +29,19 @@ const UIComponent = () => {
         <SettingsButton></SettingsButton>
         <ReloadButton></ReloadButton>
       </div>
-      <div id="lowerui" className="fixed bottom-0 w-full flex flex-col">
-        <div id="modeselectorcontainer"></div>
+      <div
+        id="lowerui"
+        className="fixed bottom-0 w-full flex flex-col items-center"
+      >
+        <div
+          id="modeselectorcontainer"
+          className="w-fit h-fit pointer-events-auto"
+        >
+          <ModeSelector></ModeSelector>
+        </div>
         <div
           id="controlfieldcontainer"
-          className="bg-gray-100 mx-auto h-[20vh] w-[99%] border-[1px] border-b-0 border-black rounded-t-md text-center pointer-events-auto"
+          className="bg-gray-100 h-[20vh] w-[99%] border-[1px] border-b-0 border-black rounded-t-md text-center pointer-events-auto"
         >
           <ControlField></ControlField>
         </div>
